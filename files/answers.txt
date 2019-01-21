@@ -1,0 +1,111 @@
+[hpc:login2@/rsgrps/bh_class/qianwenluo]$ mkdir files
+[hpc:login2@/rsgrps/bh_class/qianwenluo]$ ls
+	osys-analytics  files
+[hpc:login2@/rsgrps/bh_class/qianwenluo]$ cd files
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ wget https://www.constitution.org/usdeclar.txt
+--2019-01-15 15:25:52--  https://www.constitution.org/usdeclar.txt
+Resolving www.constitution.org... 52.52.40.206, 52.52.214.82, 52.52.39.236, ...
+Connecting to www.constitution.org|52.52.40.206|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/plain]
+Saving to: “usdeclar.txt”
+
+    [ <=>                                   ] 8,685       --.-K/s   in 0s      
+
+2019-01-15 15:25:52 (131 MB/s) - “usdeclar.txt” saved [8685]
+
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ ls
+usdeclar.txt
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ wget https://www.usconstitution.net/const.txt
+--2019-01-15 15:26:21--  https://www.usconstitution.net/const.txt
+Resolving www.usconstitution.net... 52.52.207.176
+Connecting to www.usconstitution.net|52.52.207.176|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/plain]
+Saving to: “const.txt”
+
+    [ <=>                                   ] 45,119      --.-K/s   in 0.04s   
+
+2019-01-15 15:26:22 (1.12 MB/s) - “const.txt” saved [45119]
+
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ ls
+const.txt  usdeclar.txt
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ wget -O scarlet.txt https://www.gutenberg.org/files/25344/25344-0.txt
+--2019-01-15 15:30:09--  https://www.gutenberg.org/files/25344/25344-0.txt
+Resolving www.gutenberg.org... 152.19.134.47, 2610:28:3090:3000:0:bad:cafe:47
+Connecting to www.gutenberg.org|152.19.134.47|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 525464 (513K) [text/plain]
+Saving to: “scarlet.txt”
+
+100%[======================================>] 525,464     1.06M/s   in 0.5s    
+
+2019-01-15 15:30:10 (1.06 MB/s) - “scarlet.txt” saved [525464/525464]
+
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ ls -l
+total 616
+-rw-r--r-- 1 qianwenluo bh_class  29384 Jan 16 22:08 cmds
+-rw-r--r-- 1 qianwenluo bh_class  45119 Jan 10 12:23 const.txt
+-rw-r--r-- 1 qianwenluo bh_class 525464 Jan 23  2015 scarlet.txt
+-rw-r--r-- 1 qianwenluo bh_class   8685 Jan  4 14:27 usdeclar.txt
+
+[hpc:login3@/rsgrps/bh_class/qianwenluo/files]$ cat const.txt |wc -l
+872
+[hpc:login3@/rsgrps/bh_class/qianwenluo/files]$ cat scarlet.txt |wc -l
+9120
+[hpc:login3@/rsgrps/bh_class/qianwenluo/files]$ cat usdeclar.txt |wc -l
+176
+[hpc:login3@/rsgrps/bh_class/qianwenluo/files]$ find . -type f |grep -v "^./answers.txt"|xargs cat |wc -l
+10168
+
+[hpc:login3@/rsgrps/bh_class/qianwenluo/files]$ find . -maxdepth 1 -type f -size +50k
+./scarlet.txt
+
+[hpc:login3@/rsgrps/bh_class/qianwenluo/files]$ file -b const.txt 
+ASCII English text
+
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ md5sum *.txt 
+f66a8165c621d48bac2216b2f31e8742  const.txt
+4958553be1483e4cbd615ce5fa73f6ab  scarlet.txt
+7f54939b30ae7b6d45d473a4c82a41b0  usdeclar.txt
+
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ df -k
+Filesystem               1K-blocks          Used    Available Use% Mounted on
+/dev/sda2                944785812      33498148    863288588   4% /
+none                      98884376             0     98884376   0% /dev/shm
+hpc-nfs0-10g.hpc.arizona.edu:/gsfs1/rsgrps
+                     1543570980864 1200282741760 343288239104  78% /rsgrps
+hpc-nfs0-10g.hpc.arizona.edu:/gsfs2/pbs
+                       35970351104    6852972544  29117378560  20% /pbs
+hpc-nfs0-10g.hpc.arizona.edu:/gsfs2/Bright_cm_shared
+                       35970351104    6852972544  29117378560  20% /cm/shared
+hpc-nfs0-10g.hpc.arizona.edu:/gsfs1/bio5
+                        4294967296     410201088   3884766208  10% /bio5
+hpc-nfs0-10g.hpc.arizona.edu:/gsfs2/unsupported
+                       35970351104    6852972544  29117378560  20% /unsupported
+hpc-nfs0-10g.hpc.arizona.edu:/gsfs3/extra
+                      540897443840   46987268096 493910175744   9% /extra
+hpc-nfs0-10g.hpc.arizona.edu:/gsfs3/xdisk
+                       10737418240             0  10737418240   0% /xdisk
+hpc-nfs0-10g.hpc.arizona.edu:/gsfs2/home
+                       35970351104    6852972544  29117378560  20% /home
+
+
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ grep -ciw "judge" *.txt
+const.txt:2
+scarlet.txt:11
+usdeclar.txt:1
+
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ grep -l "human" *.txt
+scarlet.txt
+usdeclar.txt
+
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ grep -iow 'scarlet' scarlet.txt |wc -l
+125
+
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ head -q -n15 *.txt > foo
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ cat foo | wc -l
+45
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ rm foo
+[hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ ls
+cmds  const.txt  scarlet.txt  usdeclar.txt	
