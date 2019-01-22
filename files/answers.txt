@@ -109,3 +109,33 @@ usdeclar.txt
 [hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ rm foo
 [hpc:login2@/rsgrps/bh_class/qianwenluo/files]$ ls
 cmds  const.txt  scarlet.txt  usdeclar.txt	
+
+
+######## graduate unix exercises
+[hpc:login3@/rsgrps/bh_class/qianwenluo/biosys-analytics/files]$ grep -cE '^c|^s' *.txt
+answers.txt:5
+const.txt:59
+scarlet.txt:883
+usdeclar.txt:5
+
+[hpc:login3@/rsgrps/bh_class/qianwenluo/biosys-analytics/files]$ grep -c '^Article\b [0-9]' *.txt
+answers.txt:0
+const.txt:7
+scarlet.txt:0
+usdeclar.txt:0
+
+[hpc:login3@/rsgrps/bh_class/qianwenluo/biosys-analytics/files]$ grep -c '^$' const.txt 
+169
+
+[hpc:login3@/rsgrps/bh_class/qianwenluo/biosys-analytics/files]$ vowel=[aeiou]
+[hpc:login3@/rsgrps/bh_class/qianwenluo/biosys-analytics/files]$ grep -io ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+     59 A
+     10 E
+     88 I
+     20 O
+      6 U
+    633 a
+    199 e
+    348 i
+    358 o
+     80 u
