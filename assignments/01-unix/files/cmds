@@ -1,0 +1,1000 @@
+   10  ls
+   11  mkdir seq
+   12  ls
+   13  uquota
+   14  cd ..
+   15  ls
+   16  cd alt
+   17  ls
+   18  cd 181001_NB501893_0054_Project_201446_redo/
+   19  ls
+   20  cd Project_201446/
+   21  ls
+   22  cd demo/
+   23  ls
+   24  rm S*
+   25  uquota
+   26  cd
+   27  cd /rsgrps/bosschen/xu/seq
+   28  ls
+   29  ll -h
+   30  ls
+   31  ll -h
+   32  ls
+   33  ll -h
+   34  rm LPS_1_1.fq.gz
+   35  ll -h
+   36  gunzip con_1_1.fq.gz
+   37  ll -h
+   38  gunzip con_1_2.fq.gz
+   39  ll -h
+   40  module load fastx
+   41  fastq_to_fasta -i con_1_1.fq -o con_1_1.fasta
+   42  fastq_to_fasta -i con_1_2.fq -o con_1_2.fasta
+   43  ll -h
+   44  gunzip con*.fq.gz
+   45  ll -h
+   46  fastq_to_fasta -i con_2_1.fq -o con_2_1.fasta
+   47  ll -h
+   48  fastq_to_fasta -i con_2_2.fq -o con_2_2.fasta
+   49  cd /rsgrps/bosschen/mice
+   50  ls
+   51  cd fastq
+   52  ls
+   53  rm *fastq.gz
+   54  ls
+   55  rm *fastq
+   56  ls
+   57  cat job_list 
+   58  ls
+   59  rm job_list 
+   60  rm sample_list 
+   61  ls
+   62  cd ..
+   63  ls
+   64  cd ..
+   65  ls
+   66  cd alt
+   67  ls
+   68  cd ..
+   69  cd human/
+   70  ls
+   71  rm 8blast.e1688580
+   72  rm 8blast.o1688580
+   73  ls
+   74  vi blast.pbs 
+   75  qsub blast.pbs 
+   76  qstat -u qianwenluo
+   77  ls
+   78  cat 8blast.o1693691
+   79  cat 8blast.e1693691
+   80  qsub blast.pbs 
+   81  ls
+   82  cat 8blast.e1693691
+   83  ls
+   84  cat 8blast.e1693707
+   85  qsub blast.pbs 
+   86  cd /rsgrps/bosschen/xu/seq
+   87  ls
+   88  gunzip LPS_2*.fq.gz
+   89  ls
+   90  fastq_to_fasta -i LPS_1_2.fq -o LPS_1_2.fasta
+   91  module load fastx
+   92  fastq_to_fasta -i LPS_1_2.fq -o LPS_1_2.fasta
+   93  ls
+   94  fastq_to_fasta -i LPS_2_2.fq -o LPS_2_2.fasta
+   95  cd /rsgrps/bosschen/xu
+   96  ls
+   97  cd seq
+   98  ls
+   99  unzip LPS_1*
+  100  gunzip LPS_1*
+  101  ls
+  102  fastq_to_fasta -i LPS_1_1.fq -o LPS_1_1.fasta
+  103  module load fastx
+  104  fastq_to_fasta -i LPS_1_1.fq -o LPS_1_1.fasta
+  105  ls
+  106  fastq_to_fasta -i LPS_2_1.fq -o LPS_2_1.fasta
+  107  ll -h
+  108  ls >sample_list
+  109  vi sample_list 
+  110  for a in `cat sample_list`;do echo 'blastn -db /extra/qianwenluo/virus.fasta -query /rsgrps/bosschen/xu/seq/'$a'.fasta -out /rsprgs/bosschen/xu/seq/blast/'$a'_out -num_threads 12 -evalue 1e-5 -outfmt "6 qseqid sseqid sgi nident qlen length pident"'>>job_list;done
+  111  cat job_list 
+  112  ls
+  113  ll -h
+  114  rm *.fq
+  115  ll -h
+  116  uquota
+  117  mkdir blast
+  118  ls
+  119  rm job_list 
+  120  for a in `cat sample_list`;do echo 'blastn -db /extra/qianwenluo/virus.fasta -query /rsgrps/bosschen/xu/seq/'$a'.fasta -out /rsprps/bosschen/xu/seq/blast/'$a'_out -num_threads 12 -evalue 1e-5 -outfmt "6 qseqid sseqid sgi nident qlen length pident"'>>job_list;done
+  121  rm job_list 
+  122  for a in `cat sample_list`;do echo 'blastn -db /extra/qianwenluo/virus.fasta -query /rsgrps/bosschen/xu/seq/'$a'.fasta -out /rsgrps/bosschen/xu/seq/blast/'$a'_out -num_threads 12 -evalue 1e-5 -outfmt "6 qseqid sseqid sgi nident qlen length pident"'>>job_list;done
+  123  va
+  124  module avail
+  125  ls
+  126  cd blast
+  127  ls
+  128  ll -h
+  129  ls
+  130  chmod 776 change_acc_to_annot_v2.pl 
+  131  ls
+  132  ./change_acc_to_annot_v2.pl con_1_1_out title1 acc_gi.txt con_1_1
+  133  head con_1_1
+  134  ll -h
+  135  ./change_acc_to_annot_v2.pl con_1_2_out title1 acc_gi.txt con_1_2
+  136  ./change_acc_to_annot_v2.pl con_2_2_out title1 acc_gi.txt con_2_2
+  137  ./change_acc_to_annot_v2.pl con_2_1_out title1 acc_gi.txt con_2_1
+  138  ls
+  139  ll -h
+  140  ls
+  141  ll -h
+  142  cd ..
+  143  ls
+  144  cd alt
+  145  cd 181001_NB501893_0054_Project_201446_redo//Project_201446/
+  146  ls
+  147  cd demo
+  148  ls
+  149  ll -h
+  150  awk '{print $2}' con_1_1 > con11_gidOnly.txt
+  151  head con11_gidOnly.txt 
+  152  ./count gi_taxid_nucl.dmp names.dmp con11_gidOnly.txt > con11.map
+  153  head con11.mao
+  154  head con11.map
+  155  head con11.mao
+  156  head con11.map
+  157  head  con11.map
+  158  ll -h
+  159  rm con11_gidOnly.txt
+  160  rm con11.map 
+  161  awk '{print $3}' con_1_1 > con11_gidOnly.txt
+  162  head con11_gidOnly.txt 
+  163  ./count gi_taxid_nucl.dmp names.dmp con11_gidOnly.txt > con11.map
+  164  head con11.map 
+  165  awk '{print $1}' con_1_1 > con11_start.txt
+  166  paste -d "\t" con11_start.txt con11.map > con11.final.output
+  167  head con11.final.output 
+  168  awk '{print $3}' con_1_2 > con12_gidOnly.txt
+  169  ./count gi_taxid_nucl.dmp names.dmp con12_gidOnly.txt > con12.map
+  170  head con12.map
+  171  awk '{print $1}' con_1_2 > con12_start.txt
+  172  paste -d "\t" con12_start.txt con12.map > con12.final.output
+  173  head con12.final.output 
+  174  awk '{print $3}' con_2_1 > con21_gidOnly.txt
+  175  ./count gi_taxid_nucl.dmp names.dmp con21_gidOnly.txt > con21.map
+  176  head con21.map
+  177  awk '{print $1}' con_2_1 > con21_start.txt
+  178  paste -d "\t" con21_start.txt con21.map > con21.final.output
+  179  head con21.final.output 
+  180  awk '{print $3}' con_2_2 > con22_gidOnly.txt
+  181  ./count gi_taxid_nucl.dmp names.dmp con22_gidOnly.txt > con22.map
+  182  head con22.map
+  183  awk '{print $1}' con_2_2 > con22_start.txt
+  184  paste -d "\t" con22_start.txt con22.map > con22.final.output
+  185  head con22.final.output 
+  186  pwd
+  187  ls
+  188  rm con*
+  189  ls
+  190  cd
+  191  cd /rsgrps/bosschen/xu/seq
+  192  ls
+  193  cd blast
+  194  ls
+  195  ll -h
+  196  ./change_acc_to_annot_v2.pl LPS_1_1_out title1 acc_gi.txt lps_1_1
+  197  head lps_1_1 
+  198  ./change_acc_to_annot_v2.pl LPS_1_2_out title1 acc_gi.txt lps_1_2
+  199  ./change_acc_to_annot_v2.pl LPS_2_1_out title1 acc_gi.txt lps_2_1
+  200  ./change_acc_to_annot_v2.pl LPS_2_2_out title1 acc_gi.txt lps_2_2
+  201  ls
+  202  cd
+  203  cd /rsgrps/bosschen/alt/181001_NB501893_0054_Project_201446_redo/Project_201446/
+  204  ls
+  205  cd demo
+  206  ls
+  207  ll -h
+  208  awk '{print $3}' lps_1_1 > lps11_gidOnly.txt
+  209  head lps11_gidOnly.txt 
+  210  ./count gi_taxid_nucl.dmp names.dmp lps11_gidOnly.txt > lps11.map
+  211  head lps11.map 
+  212  awk '{print $3}' lps_1_2 > lps12_gidOnly.txt
+  213  awk '{print $3}' lps_2_2 > lps22_gidOnly.txt
+  214  awk '{print $3}' lps_2_1 > lps21_gidOnly.txt
+  215  ./count gi_taxid_nucl.dmp names.dmp lps12_gidOnly.txt > lps12.map
+  216  head lps12.map 
+  217  ./count gi_taxid_nucl.dmp names.dmp lps21_gidOnly.txt > lps21.map
+  218  ./count gi_taxid_nucl.dmp names.dmp lps22_gidOnly.txt > lps22.map
+  219  awk '{print $1}' lps_1_1 > lps11_start.txt
+  220  awk '{print $1}' lps_1_2 > lps12_start.txt
+  221  awk '{print $1}' lps_2_1 > lps21_start.txt
+  222  awk '{print $1}' lps_2_2 > lps22_start.txt
+  223  paste -d "\t" lps11_start.txt lps11.map > lps11.final.output
+  224  paste -d "\t" lps12_start.txt lps12.map > lps12.final.output
+  225  paste -d "\t" lps21_start.txt lps21.map > lps21.final.output
+  226  paste -d "\t" lps22_start.txt lps22.map > lps22.final.output
+  227  head lps11.final.output 
+  228  ls
+  229  rm lps*
+  230  ls
+  231  cd
+  232  cd /rsgrps/bosschen/human/seq
+  233  ls
+  234  cd ..
+  235  ls
+  236  cd xu
+  237  ls
+  238  cd seq
+  239  ls
+  240  cd blast
+  241  ls
+  242  rm con*
+  243  cd ..
+  244  rm -r blast
+  245  ls
+  246  rm job_list 
+  247  rm sample_list 
+  248  ls
+  249  cd /xdisk/qianwenluo
+  250  ls
+  251  cd Project_201446/
+  252  ls
+  253  pwd
+  254  ls
+  255  cd mapped
+  256  ls
+  257  cd
+  258  ls
+  259  cd /xdisk/qianwenluo
+  260  ls
+  261  cd Project_201446/
+  262  ls
+  263  cd seq
+  264  ls
+  265  cd ..
+  266  ls
+  267  cd unmapped/
+  268  ls
+  269  cd demo/
+  270  ls
+  271  cd ..
+  272  ls
+  273  cd ..
+  274  cd
+  275  cd /extra/qianwenluo
+  276  ls
+  277  uquota
+  278  cd 
+  279  cd
+  280  xdisk -c delete
+  281  cd /xdisk/qianwenluo
+  282  ls
+  283  va
+  284  cd /rsgrps/bh_class
+  285  ls
+  286  cd
+  287  cd ssh
+  288  cd .ssh
+  289  cat id_rsa.pub
+  290  cd
+  291  cd /rsgrps/bh_class
+  292  mkdir qianwenluo
+  293  cd qianwenluo
+  294  git clone git@github.com:qianwenluo/biosys-analytics.git
+  295  va
+  296  uquota
+  297  cd rsgrps/bh_class
+  298  cd /rsgrps/bh_class
+  299  ls
+  300  cd
+  301  ls
+  302  cd /rsgrps/bh_class
+  303  ls
+  304  cd .ssh
+  305  ls
+  306  cd /rsgrps/bh_class
+  307  ls
+  308  cd qianwenluo
+  309  ls
+  310  cd biosys-analytics/
+  311  ls
+  312  cd ..
+  313  ls
+  314  cd ..
+  315  ls
+  316  hostname
+  317  ls
+  318  mkdir work
+  319  ls
+  320  cd workd
+  321  cd work
+  322  git clone git@github.com:qianwenluo/biosys-analytics.git
+  323  ls
+  324  whoami
+  325  w
+  326  man
+  327  man ls
+  328  ls -l
+  329  ls
+  330  echo "hello"
+  331  echo hello
+  332  cowsay heelo
+  333  env
+  334  echo $USER
+  335  echo USER
+  336  which
+  337  type ssh
+  338  which ssh
+  339  pwd
+  340  ls -h
+  341  cd biosys-analytics/
+  342  ls
+  343  cd lectures/
+  344  ls
+  345  ll -h
+  346  cd
+  347  ll -h
+  348  top
+  349  alias ls='ls --color=auto' 2>/dev/null
+  350  ls
+  351  cd pbmc
+  352  ls
+  353  cd ..
+  354  ls
+  355  rm -r pbmc
+  356  ls
+  357  ps -fu $USER
+  358  kill 5327
+  359  bc
+  360  ls
+  361  alias ls='ls --color=auto' 2>/dev/null
+  362  ls
+  363  df
+  364  bc
+  365  echo $PATH
+  366  tree
+  367  python --version
+  368  cd /rsgrps/bh_class/qianwenluo/files
+  369  ls
+  370  vi answers.txt
+  371  rm answers.txt 
+  372  vi answers.txt
+  373  cat answers.txt 
+  374  alias ls='ls --color=auto' 2>/dev/null
+  375  cd /rsgrps/bh_class/qianwenluo/files/
+  376  ls
+  377  vi answers.txt 
+  378  cat answers.txt 
+  379  ls
+  380  rm answers.txt 
+  381  ls
+  382  history
+  383  alias ls='ls --color=auto' 2>/dev/null
+  384  cd /rsgrps/bh_class/qianwenluo/files
+  385  ls
+  386  ll
+  387  cat const.txt |wc -l
+  388  cat scarlet.txt |wc -l
+  389  cat usdeclar.txt.txt |wc -l
+  390  cat usdeclar.txt |wc -l
+  391  find . -type f
+  392  find . -type f |grep -v "^./answers.txt"
+  393  find . -type f |grep -v "^./answers.txt"|xargs cat |wc -l
+  394  find . -maxdepth 1 -type f -size +50k
+  395  file -b const.txt 
+  396  md5sum *.txt
+  397  md5sum -c *.txt
+  398  find -type f -exec md5sum
+  399  md5sum
+  400  history
+  401  cd /rsgrps
+  402  ls
+  403  cd bosschen
+  404  ls
+  405  alias ls='ls --color=auto' 2>/dev/null
+  406  ls
+  407  mkdir ncbi
+  408  ls
+  409  cd ncbi
+  410  ls
+  411  /rsgrps/anling/qluo/sratoolkit.2.9.2-ubuntu64/bin/prefetch SRR7687751
+  412  /rsgrps/anling/qluo/sratoolkit.2.9.2-ubuntu64/bin/prefetch SRR7687750
+  413  /rsgrps/anling/qluo/sratoolkit.2.9.2-ubuntu64/bin/prefetch SRR7687749
+  414  ls
+  415  cd /rsgrps/anling/qluo
+  416  ls
+  417  cd sratoolkit.2.9.2-ubuntu64/
+  418  ls
+  419  cd example
+  420  ls
+  421  cd ..
+  422  ls
+  423  cd bin
+  424  ls
+  425  cd ..
+  426  ls
+  427  cd ll
+  428  ls
+  429  cd ..
+  430  cd data
+  431  ls
+  432  cd sra
+  433  ls
+  434  mv SRR7687749.sra /rsgrps/bosschen/ncbi
+  435  mv SRR7687750.sra /rsgrps/bosschen/ncbi
+  436  mv SRR7687751.sra /rsgrps/bosschen/ncbi
+  437  ls
+  438  cd /rsgrps/bosschen/ncbi
+  439  ls
+  440  ll -h
+  441  /rsgrps/anling/qluo/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump SRR7687749.sra 
+  442  ls
+  443  rm SRR7687749.fastq
+  444  /rsgrps/anling/qluo/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump SRR7687749.sra --gzip --skip-technical --readids --dumpbase --split-files --clip SRR7687749.sra
+  445  ls
+  446  rm SRR7687749_1.fastq.gz
+  447  rm SRR7687749_2.fastq.gz
+  448  /rsgrps/anling/qluo/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump --gzip --skip-technical --readids --dumpbase --split-files --clip SRR7687749.sra
+  449  ls
+  450  /rsgrps/anling/qluo/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump --gzip --skip-technical --readids --dumpbase --split-files --clip SRR7687750.sra
+  451  /rsgrps/anling/qluo/sratoolkit.2.9.2-ubuntu64/bin/fastq-dump --gzip --skip-technical --readids --dumpbase --split-files --clip SRR7687751.sra
+  452  ls
+  453  ll -h
+  454  rm *.sra
+  455  module load fastqc
+  456  fastqc *.fastq.gz
+  457  ls
+  458  rm *.zip
+  459  ls
+  460  scp qianwenluo@sftp.hpc.arizona.edu:/rsgrps/bosschen/ncbi/*.html /Users/qianwenluo/Desktop
+  461  alias ls='ls --color=auto' 2>/dev/null
+  462  ls
+  463  cd /rsgrps/bh_class
+  464  ls
+  465  cd qianwenluo
+  466  ls
+  467  cd biosys-analytics/
+  468  ls
+  469  cd lectures
+  470  ls
+  471  cd 03-unix-exercises/
+  472  ls
+  473  cd ..
+  474  ls
+  475  cd ..
+  476  ls
+  477  cd ..
+  478  ls
+  479  mkdir files
+  480  ls
+  481  wget https://www.constitution.org/usdeclar.txt
+  482  ls
+  483  rm usdeclar.txt 
+  484  ls
+  485  cd files
+  486  wget https://www.constitution.org/usdeclar.txt
+  487  ls
+  488  wget https://www.usconstitution.net/const.txt
+  489  ls
+  490  wget https://www.gutenberg.org/files/25344/25344-0.txt > scarlet.txt
+  491  ls
+  492  rm 25344-0.txt 
+  493  rm scarlet.txt 
+  494  ls
+  495  wget -O scarlet.txt https://www.gutenberg.org/files/25344/25344-0.txt
+  496  ls
+  497  pwd
+  498  alias ls='ls --color=auto' 2>/dev/null
+  499  ls
+  500  uquota
+  501  uquota -qianwenluo
+  502  df
+  503  df -k
+  504  cd /rsgrps/bh_class/qianwenluo/files
+  505  ls
+  506  head -n 15 *.txt
+  507  hels
+  508  ls
+  509  head -n 15 const.txt 
+  510  head const.txt 
+  511  head -n 15 *.txt >foo
+  512  ls
+  513  cat foo |wc -l
+  514  foo
+  515  cat foo
+  516  ls
+  517  grep -cvP '\S' const.txt 
+  518  grep -c "^$" const.txt 
+  519  grep
+  520  grep --help
+  521  grep -o 'scarlet' scarlet.txt |wc -l
+  522  grep -o '\<scarlet\>' scarlet.txt |wc -l
+  523  grep -o '\<SCARLET\>' scarlet.txt |wc -l
+  524  grep -io '\<SCARLET\>' scarlet.txt |wc -l
+  525  grep -io '\<scarlet\>' scarlet.txt |wc -l
+  526  grep -iF 'scarlet' scarlet.txt |wc -l
+  527  grep --help
+  528  grep -iF 'scarlet' scarlet.txt |wc -l
+  529  grep -io 'scarlet' scarlet.txt |wc -l
+  530  grep -io '\<scarlet\>' scarlet.txt |wc -l
+  531  grep -c ^c *.txt
+  532  grep -c ^s *.txt
+  533  grep -c [^c^s] *.txt
+  534  grep -c [^c ^s] *.txt
+  535  grep -c [^c^s] *.txt
+  536  grep -c [^cs] *.txt
+  537  grep -c [^c] *.txt|grep -c [^s] *.txt
+  538  grep -c ^c *.txt|grep -c ^s *.txt
+  539  grep -c ^c^s *.txt
+  540  grep -c '^c|^s' 
+  541  grep -c '^c|^s' *.txt
+  542  egrep -c '^c|^s' *.txt
+  543  grep -cE '^c|^s' *.txt
+  544  alias ls='ls --color=auto' 2>/dev/null
+  545  cd /rsgrps/bh_class/qianwenluo
+  546  ls
+  547  cd files
+  548  ls
+  549  grep -l "human" *.txt
+  550  head scarlet.txt 
+  551  head -n 20 scarlet.txt 
+  552  cat scarlet.txt 
+  553  grep -l "human" *.txt
+  554  grep -ciw "judge" *.txt
+  555  grep -o ^Artical$num\b *.txt
+  556  num = [0-9]
+  557  vowel=[aeiou]
+  558  grep -o ^Artical\b.* *.txt
+  559  grep -o ^Artical *.txt
+  560  grep -o ^Article *.txt
+  561  grep -o ^Article\b *.txt
+  562  grep -o ^Article \b *.txt
+  563  grep -o ^Article \b .* *.txt
+  564  grep -o ^Article \b.* *.txt
+  565  grep -o ^Article \b[0-9] *.txt
+  566  grep -o ^Article \b [0-9] *.txt
+  567  grep -o ^Article \b '[0-9]' *.txt
+  568  grep -o ^Article \b'[0-9]' *.txt
+  569  grep -o '[0-9]' *.txt
+  570  grep -o '\b [0-9]' *.txt
+  571  grep -o '^Article \b [0-9]' *.txt
+  572  grep -o ^Article '\b [0-9]' *.txt
+  573  grep -o '^Article\b [0-9]' *.txt
+  574  grep -c '^Article\b [0-9]' *.txt
+  575  ls
+  576  rm foo
+  577  head -n 15 const.txt > foo
+  578  cat foo | wc -l
+  579  head -n 15 *.txt > foo1
+  580  cat foo1 | wc -l
+  581  rm foo1
+  582  rm foo
+  583  head -n 15 *.txt >> foo
+  584  ls
+  585  cat foo | wc -l
+  586  rm foo
+  587  grep -icn ^$vowel scarlet.txt 
+  588  grep -ion ^$vowel scarlet.txt 
+  589  grep -ion ^$vowel scarlet.txt | uniq
+  590  grep -ion ^$vowel scarlet.txt | -c uniq
+  591  grep -ionc ^$vowel scarlet.txt 
+  592  grep -ioc ^$vowel scarlet.txt 
+  593  alias ls='ls --color=auto' 2>/dev/null
+  594  cd /rsgrps/bh_class
+  595  cd file
+  596  cd files
+  597  ls
+  598  cd qianwenluo/files
+  599  ll -h
+  600  cd ..
+  601  ll -h
+  602  cd ..
+  603  ll -h
+  604  cd ..
+  605  cd bh_class/qianwenluo/files
+  606  grep -ioc ^$vowel scarlet.txt| ls 
+  607  grep -ioc ^$vowel scarlet.txt
+  608  grep -io ^$vowel scarlet.txt
+  609  grep -ion ^$vowel scarlet.txt 
+  610  vowel = [aeiou]
+  611  ls
+  612  grep -ion ^$vowel scarlet.txt 
+  613  $vowel
+  614  echo $vowel
+  615  vowel=[aeiou]
+  616  grep -ion ^$vowel scarlet.txt 
+  617  grep -ion ^$vowel scarlet.txt |ll
+  618  grep -ion ^$vowel scarlet.txt |ls
+  619  grep -ion ^$vowel scarlet.txt |wc -l
+  620  grep -ion ^$vowel scarlet.txt | sort | uniq -c
+  621  grep -io ^$vowel scarlet.txt | sort | uniq -c
+  622  grep -io ^$vowel scarlet.txt | uniq -c
+  623  grep -io ^$vowel scarlet.txt | sort | uniq -c
+  624  grep -io ^$vowel scarlet.txt | sort -n| uniq -c
+  625  grep -io ^$vowel scarlet.txt | sort -r| uniq -c
+  626  grep -io ^$vowel scarlet.txt | sort -c| uniq -c
+  627  grep -io ^$vowel scarlet.txt | sort -nr| uniq -c
+  628  grep -io ^$vowel scarlet.txt | L_COLLATE=C sort| uniq -c
+  629  grep -io ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+  630  grep -ioW ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+  631  grep -iow ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+  632  grep -ioe ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+  633  grep -ioE ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+  634  grep -ioEw ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+  635  grep -ioEe ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+  636  grep -ioE ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+  637  grep -iF ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+  638  grep -iOF ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+  639  grep -ioF ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+  640  grep -io ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+  641  sed --help
+  642  head *.txt > foo
+  643  cat foo | wc -l
+  644  head foo
+  645  rm foo
+  646  ls
+  647  rm scarlet.txt 
+  648  wget -O scarlet.txt https://www.gutenberg.org/files/25344/25344-0.txt
+  649  grep -io ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+  650  md5sum scarlet.txt 
+  651  md5sum *.txt 
+  652  grep -iow 'scarlet' scarlet.txt 
+  653  grep -iow 'scarlet' scarlet.txt |wc -l
+  654  ls
+  655  head -n 15 *.txt|wc -l
+  656  head -n 15 const.txt|wc -l
+  657  head -n 15 scarlet.txt|wc -l
+  658  head -n 15 usdeclar.txt|wc -l
+  659  ls
+  660  head 15 *.txt|wc -l
+  661  head 15 *.txt | wc -l
+  662  head -15 *.txt | wc -l
+  663  head -q -n15 *.txt | wc -l
+  664  head -q -n15 *.txt > foo
+  665  cat foo | wc -l
+  666  rm foo
+  667  ls
+  668  grep -c ^i scarlet.txt 
+  669  grep -c ^I scarlet.txt 
+  670  grep -cw ^I scarlet.txt 
+  671  grep -ce ^I scarlet.txt 
+  672  grep -cE ^I scarlet.txt 
+  673  grep  ^I scarlet.txt| wc -l 
+  674  grep  ^i scarlet.txt| wc -l 
+  675  cd /rsgrps/bh_class/qianwenluo/files
+  676  ls
+  677  history
+  678  history > cmds
+  679  ls
+  680  wc --help
+  681  man wc
+  682  man cp
+  683  man rm
+  684  man find
+  685  find --help
+  686  cat foo
+  687  echo $PATH
+  688  ls
+  689  ls -a
+  690  vi .bachrc
+  691  ls
+  692  ls -a
+  693  cat .bashrc
+  694  echo $PATH
+  695  ls -l
+  696  alias ls='ls --color=auto' 2>/dev/null
+  697  cd /extra/qianwenluo
+  698  ls
+  699  cd allVirus_blast/
+  700  ls
+  701  cd ..
+  702  ls
+  703  cd 
+  704  cd /rsgrps/bosschen/alt
+  705  ls
+  706  cd 181001_NB501893_0054_Project_201446_redo/
+  707  ls
+  708  cd Project_201446/
+  709  ls
+  710  cd demo
+  711  ls
+  712  ll -h
+  713  ls
+  714  head sample1_1
+  715  awk '{print $3}' sample1_1 > sample11_gidOnly.txt
+  716  head sample11_gidOnly.txt 
+  717  ./count gi_taxid_nucl.dmp names.dmp sample11_gidOnly.txt > sample11.map
+  718  head sample11.map 
+  719  awk '{print $1}' sample1_1 > sample11start.txt
+  720  head sample11start.txt 
+  721  paste -d "\t" sample11start.txt sample11.map >sample11.final.output
+  722  head sample11.final.output 
+  723  awk '{print $3}' sample2_1 > sample21_gidOnly.txt
+  724  ./count gi_taxid_nucl.dmp names.dmp sample21_gidOnly.txt > sample21.map
+  725  awk '{print $1}' sample2_1 > sample21start.txt
+  726  paste -d "\t" sample21start.txt sample21.map >sample21.final.output
+  727  awk '{print $3}' sample3_1 > sample31_gidOnly.txt
+  728  ./count gi_taxid_nucl.dmp names.dmp sample31_gidOnly.txt > sample31.map
+  729  awk '{print $1}' sample3_1 > sample31start.txt
+  730  paste -d "\t" sample31start.txt sample31.map >sample31.final.output
+  731  head sample31.final.output
+  732  ls
+  733  rm *map
+  734  ls
+  735  rm sample1*
+  736  rm sample2*
+  737  rm sample3*
+  738  ls
+  739  cd /rsgrps/bosschen
+  740  ls
+  741  cd ncbi
+  742  ls
+  743  gunzip *.fastq.gz
+  744  ls
+  745  module load fastx
+  746  fastq_to_fasta --help
+  747  fastq_to_fasta --h
+  748  fastq_to_fasta -h
+  749  fastq_to_fasta -i SRR7687749_1.fastq -o sample1_1.fasta
+  750  fastq_to_fasta -i SRR7687749_2.fastq -o sample1_2.fasta
+  751  fastq_to_fasta -i SRR7687750_1.fastq -o sample2_1.fasta
+  752  fastq_to_fasta -i SRR7687750_2.fastq -o sample2_2.fasta
+  753  fastq_to_fasta -i SRR7687751_1.fastq -o sample3_1.fasta
+  754  fastq_to_fasta -i SRR7687751_2.fastq -o sample3_2.fasta
+  755  ll -h
+  756  ls fasta/ > sample_list
+  757  rm *html
+  758  ls
+  759  vi sample
+  760  ls
+  761  rm sample
+  762  ls
+  763  cat sample_list 
+  764  rm sample_list 
+  765  ls > sample_list
+  766  vi sample_list 
+  767  ls
+  768  for a in `cat sample_list`;do echo 'blastn -db /extra/qianwenluo/virus.fasta -query /rsgrps/bosschen/ncbi/'$a'.fasta -out /rsgrps/bosschen/ncbi/blast/'$a'_out -num_threads 12 -evalue 1e-5 -outfmt "6 qseqid sseqid sgi nident qlen length"'>>job_list;done
+  769  cat job_list 
+  770  ls
+  771  mkdir blast
+  772  ls
+  773  vi blast.pbs
+  774  qsub blast
+  775  qsub blast.pbs 
+  776  va
+  777  qstat -qianwenluo
+  778  qstat
+  779  qstat qianwenluo
+  780  qstat -qianwenluo
+  781  qstat -u qianwenluo
+  782  ll -h
+  783  head sample1_1.fasta
+  784  ls
+  785  cd blast
+  786  ls
+  787  ll -h
+  788  ls
+  789  ll -h
+  790  chmod 776 change_acc_to_annot_v2.pl 
+  791  ls
+  792  ll -h
+  793  qstat -u qianwenluo
+  794  head sample1_1_out
+  795  ./change_acc_to_annot_v2.pl sample1_1_out title1 acc_gi.txt sample1_1
+  796  head sample1_1
+  797  ./change_acc_to_annot_v2.pl sample1_2_out title1 acc_gi.txt sample1_2
+  798  head sample1_2
+  799  ./change_acc_to_annot_v2.pl sample2_1_out title1 acc_gi.txt sample2_1
+  800  ./change_acc_to_annot_v2.pl sample2_2_out title1 acc_gi.txt sample2_2
+  801  ./change_acc_to_annot_v2.pl sample3_1_out title1 acc_gi.txt sample3_1
+  802  ./change_acc_to_annot_v2.pl sample3_2_out title1 acc_gi.txt sample3_2
+  803  ll -h
+  804  cp sample1_1 /rsgrps/bosschen/alt/181001_NB501893_0054_Project_201446_redo/Project_201446/demo
+  805  cp sample1_2 /rsgrps/bosschen/alt/181001_NB501893_0054_Project_201446_redo/Project_201446/demo
+  806  cp sample2_1 /rsgrps/bosschen/alt/181001_NB501893_0054_Project_201446_redo/Project_201446/demo
+  807  cp sample2_2 /rsgrps/bosschen/alt/181001_NB501893_0054_Project_201446_redo/Project_201446/demo
+  808  cp sample3_1 /rsgrps/bosschen/alt/181001_NB501893_0054_Project_201446_redo/Project_201446/demo
+  809  cp sample3_2 /rsgrps/bosschen/alt/181001_NB501893_0054_Project_201446_redo/Project_201446/demo
+  810  ls
+  811  rm sample1_1
+  812  rm sample1_2
+  813  rm sample2_2
+  814  rm sample2_1
+  815  rm sample3_1
+  816  rm sample3_2
+  817  ls
+  818  cd /rsgrps/bosschen/alt/181001_NB501893_0054_Project_201446_redo/Project_201446/demo
+  819  ls
+  820  awk '{print $3}' sample1_1 > sample11_gidOnly.txt
+  821  awk '{print $3}' sample1_2 > sample12_gidOnly.txt
+  822  ./count gi_taxid_nucl.dmp names.dmp sample11_gidOnly.txt > sample11.map
+  823  ./count gi_taxid_nucl.dmp names.dmp sample12_gidOnly.txt > sample12.map
+  824  head sample12.map 
+  825  awk '{print $1}' sample1_2 > sample12start.txt
+  826  paste -d "\t" sample12start.txt sample12.map >sample12.final.output
+  827  head sample12.final.output 
+  828  awk '{print $3}' sample2_2 > sample22_gidOnly.txt
+  829  ./count gi_taxid_nucl.dmp names.dmp sample22_gidOnly.txt > sample22.map
+  830  awk '{print $1}' sample2_2 > sample22start.txt
+  831  paste -d "\t" sample22start.txt sample22.map >sample22.final.output
+  832  awk '{print $3}' sample3_2 > sample32_gidOnly.txt
+  833  ./count gi_taxid_nucl.dmp names.dmp sample32_gidOnly.txt > sample32.map
+  834  awk '{print $1}' sample3_2 > sample32start.txt
+  835  paste -d "\t" sample32start.txt sample32.map >sample32.final.output
+  836  cd
+  837  cd /rsgrps/bosschen/ncbi
+  838  ls
+  839  cd blast
+  840  ls
+  841  cd /extra/qianwenluo
+  842  ls
+  843  cd ..
+  844  cd /rsgrps/bosschen
+  845  ls
+  846  cd human
+  847  ls
+  848  cat blast.pbs 
+  849  alias ls='ls --color=auto' 2>/dev/null
+  850  ls
+  851  cd ..
+  852  ls
+  853  cd xu
+  854  ls
+  855  cd seq
+  856  ls
+  857  cd ..
+  858  ls
+  859  cd ..
+  860  cd human
+  861  ls
+  862  cd blast_out/
+  863  ls
+  864  head alt_01_1_out
+  865  cd
+  866  cd /extra/qianwenluo
+  867  ls
+  868  cd
+  869  cd /rsgrps/bosschen/xu
+  870  ls
+  871  cd seq
+  872  ls
+  873  cd ..
+  874  cd human
+  875  ls
+  876  cd blast_out
+  877  ls
+  878  cp acc_gi.txt /rsgrps/bosschen/ncbi/blast
+  879  cp change_acc_to_annot_v2.pl /rsgrps/bosschen/ncbi/blast
+  880  cp title1 /rsgrps/bosschen/ncbi/blast
+  881  cd /rsgrps/bh_class/qianwenluo/files
+  882  ls
+  883  ll -h
+  884  ls -h
+  885  ls -l
+  886  cat const.txt |wc -l
+  887  cat scarlet.txt |wc -l
+  888  cat usdeclar.txt |wc -l
+  889  df -k
+  890  grep -ciw "judge" *.txt 
+  891  ls
+  892  cd /rsgrps/bh_class/qianwenluo
+  893  ls
+  894  git add files
+  895  git commit -m 'unix' files
+  896  git push
+  897  git add files
+  898  git init
+  899  git add files
+  900  git commit -m 'all done' files
+  901  git push
+  902  git push -help
+  903  pwd
+  904  ls
+  905  mv -r files ./biosys-analytics/
+  906  mv files ./biosys-analytics/
+  907  ls
+  908  cd biosys-analytics/
+  909  ls
+  910  git add files
+  911  git commit -m 'all done' files
+  912  git push
+  913  ls
+  914  git pull upstream master
+  915  git remote add upstream https://github.com/hurwitzlab/biosys-analytics.git
+  916  ls
+  917  git pull upstream master
+  918  ls
+  919  cd assignments
+  920  ls
+  921  cd ..
+  922  ls
+  923  cd ..
+  924  ls
+  925  cd
+  926  cd /rsgrps/bh_class
+  927  cd qianwenluo
+  928  ls
+  929  cd files
+  930  vi answers.txt
+  931  ls
+  932  git add files
+  933  cd ..
+  934  ls
+  935  git add files
+  936  git pull upstream master
+  937  rm -f /rsgrps/bh_class/.git/index.lock
+  938  git add files
+  939  git clone git@github.com:qianwenluo/biosys-analytics.git
+  940  ls
+  941  rm biosys-analytics/
+  942  rm -r biosys-analytics/
+  943  git clone git@github.com:qianwenluo/biosys-analytics.git
+  944  ls
+  945  git add files
+  946  rm -f /rsgrps/bh_class/.git/index.lock
+  947  ls
+  948  git add files
+  949  echo "export PATH=/rsgrps/bh_class/conda/bin:/rsgrps/bh_class/bin:$PATH" >> ~/.bashrc
+  950  git pull upstream master
+  951  git add files
+  952  cd
+  953  echo "export PATH=/rsgrps/bh_class/conda/bin:/rsgrps/bh_class/bin:$PATH" >> ~/.bashrc
+  954  ls
+  955  cd /rsgrps/bh_class/qianwenluo
+  956  ls
+  957  git add files
+  958  git remote add upstreams https://github.com/hurwitzlab/biosys-analytics.git
+  959  git config -l
+  960  git remote add upstreams https://github.com/hurwitzlab/biosys-analytics.git
+  961  config -help
+  962  ls -la ~/.gitconfig
+  963  ls -la ~/git/config.lock
+  964  git init
+  965  ls
+  966  cd biosys-analytics/
+  967  ls
+  968  cd ..
+  969  git add files
+  970  git commit -m 'unix exercises' files
+  971  git push
+  972  git push qianwenlu
+  973  git push qianwenluo
+  974  git remote add upstream https://github.com/hurwitzlab/biosys-analytics.git
+  975  git pull upstream master
+  976  ls
+  977  rm assignments/
+  978  rm -r assignments/
+  979  rm -r bin
+  980  rm -r data
+  981  rm -r examples
+  982  rm -r lectures
+  983  rm -r LICENSE 
+  984  rm README.md 
+  985  LS
+  986  ls
+  987  cd biosys-analytics/
+  988  git pull upstream master
+  989  ls
+  990  cd ..
+  991  ls
+  992  git add files
+  993  fit commit -m 'unix exercises'
+  994  git commit -m 'unix exercises'
+  995  git add files
+  996  git commit -m 'unix exercises' files
+  997  git push
+  998  ls
+  999  cd files
+ 1000  ls
+ 1001  cd /rsgrps/bh_class/qianwenluo/files
+ 1002  cd /rsgrps/bh_class/qianwenluo/
+ 1003  cd biosys-analytics/
+ 1004  ls
+ 1005  cd files
+ 1006  ls
+ 1007  rm cmds
+ 1008  vi answers.txt 
+ 1009  history > cmds
