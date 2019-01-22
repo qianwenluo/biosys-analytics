@@ -55,7 +55,7 @@ total 616
 9120
 [hpc:login3@/rsgrps/bh_class/qianwenluo/files]$ cat usdeclar.txt |wc -l
 176
-[hpc:login3@/rsgrps/bh_class/qianwenluo/files]$ find . -type f |grep -v "^./answers.txt"|xargs cat |wc -l
+[hpc:login3@/rsgrps/bh_class/qianwenluo/biosys-analytics/files]$ bc <<< 872+9120+176
 10168
 
 [hpc:login3@/rsgrps/bh_class/qianwenluo/files]$ find . -maxdepth 1 -type f -size +50k
