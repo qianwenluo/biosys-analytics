@@ -1,0 +1,22 @@
+[hpc:login3@/rsgrps/bh_class/qianwenluo/biosys-analytics/assignments/01-unix-grad/files]$ grep -cE '^c|^s' *.txt
+const.txt:59
+scarlet.txt:883
+usdeclar.txt:5
+[hpc:login3@/rsgrps/bh_class/qianwenluo/biosys-analytics/assignments/01-unix-grad/files]$ grep -c '^Article\b [0-9]' *.txt
+const.txt:7
+scarlet.txt:0
+usdeclar.txt:0
+[hpc:login3@/rsgrps/bh_class/qianwenluo/biosys-analytics/assignments/01-unix-grad/files]$ grep -c '^$' const.txt 
+169
+[hpc:login3@/rsgrps/bh_class/qianwenluo/biosys-analytics/assignments/01-unix-grad/files]$ vowel=[aeiou]
+[hpc:login3@/rsgrps/bh_class/qianwenluo/biosys-analytics/assignments/01-unix-grad/files]$ grep -io ^$vowel scarlet.txt | LC_COLLATE=C sort| uniq -c
+     59 A
+     10 E
+     88 I
+     20 O
+      6 U
+    633 a
+    199 e
+    348 i
+    358 o
+     80 u
