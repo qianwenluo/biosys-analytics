@@ -22,12 +22,12 @@ NUM_FILES=$(wc -l "$FILES" | awk '{print $1}')
 
 if [[ $NUM_FILES -lt 1 ]]; then
     printf "There are no countries starting with %s\n" \"$ARG\"
-    exit 1
+    exit 0
 fi
 
 i=0
 while read -r FILENAME; do
     BASENAME=$(basename "$FILENAME")
-    printf "%5d %s\n" "$((i+1))" "${BASENAME%.cc.txt}"
+    printf "%5d %s\n" "$((i+1))" "${BASENAME%.*.*}"
     i=$((i+1))
 done < "$FILES"
