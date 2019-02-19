@@ -67,8 +67,8 @@ def main():
     codon2aa = {}
     with open(codons) as txt:
         for row in txt:
-            codon = row[0:3]
-            codon2aa[codon] = row[4:(len(row)-1)] 
+            codon,aa = row.split()
+            codon2aa[codon] = aa 
     
     out_fh = open(outfile, 'wt')
     k =3 
