@@ -75,8 +75,8 @@ def main():
             print('{:3d}: {}'.format(i, os.path.basename(file)))
 
             base, ext = os.path.splitext(os.path.basename(file))
-            low = base + '_low' + ext
-            high = base + '_high' + ext
+            low = os.path.join(out_dir, base + '_low' + ext)
+            high = os.path.join(out_dir, base + '_high' + ext)
             high_seq = []
             low_seq = []
 
@@ -90,10 +90,10 @@ def main():
 
                 if gc >= pct:
                     high_seq.append(record)
-                    SeqIO.write(high_seq, os.path.join(out_dir, high),"fasta")
+                    SeqIO.write(high_seq, high, "fasta")
                 else:
                     low_seq.append(record)
-                    SeqIO.write(low_seq, os.path.join(out_dir, low), "fasta")
+                    SeqIO.write(low_seq, low, "fasta")
 
 
     print('Done, wrote {} sequence{} to out dir "{}"'.format(
