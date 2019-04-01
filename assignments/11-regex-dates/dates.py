@@ -73,7 +73,7 @@ def main():
         standard = '20{}-{}-01'.format(match3.group('year'),match3.group('month').zfill(2))
 
     elif match4:
-        if len(match4.group('month')) < 4:
+        if len(match4.group('month')) == 3:
             month = short[match4.group('month')]
         else:
             month = long[match4.group('month')]
