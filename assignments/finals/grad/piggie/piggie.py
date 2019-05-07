@@ -64,7 +64,7 @@ def main():
     for i ,file in enumerate(files, start = 1):
         if not os.path.isfile(file):
             warn('"{}" is not a file.'.format(os.path.basename(file)))
-            #print('Done, wrote 0 files to "{}".'.format(out_dir))
+
             continue
         count += 1
         basename = os.path.basename(file)
@@ -74,17 +74,15 @@ def main():
 
         for line in fh:
             for word in line.split():
-                clean = re.sub("[^a-zA-Z0-9']", '', word)
+                clean = re.sub("[^a-zA-Z0-9\']", '', word)
                 consonants = re.sub('[aeiouAEIOU]', '', string.ascii_letters)
                 match = re.match('^([' + consonants + ']+)(.+)', clean)
                 if match:
                     out_fh.write('-'.join([match.group(2), match.group(1) + 'ay']) + ' ')
                 else:
-                    out_fh.write(word + '-yay' + ' ')
+                    out_fh.write(clean + '-yay' + ' ')
             out_fh.write('\n')
-            #new_word = ''.join(standard)
-                #new_list.append(new_word)
-            #out_fh.write(new_word)
+
         print('{}: {}'.format(i,basename))
     if count ==1:
         print('Done, wrote 1 file to "{}".'.format(out_dir))
